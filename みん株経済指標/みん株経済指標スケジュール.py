@@ -1,18 +1,3 @@
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.16.4
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
-
 # +
 # みん株 経済指標スケジュールをWebスクレイピングしGoogle Calendarに反映する
 # https://fx.minkabu.jp/indicators
@@ -26,10 +11,10 @@
 # 20241224 ver1.4 バグ修正-(def get_googlecalendar()) google calendarから取得データが無い場合に発生するエラーを修正
 
 # +
-# #!pip install google-api-python-client google-auth
-# #!pip install google-auth-httplib2
-# #!pip install google-auth-oauthlib
-# #!pip install investpy
+# #!conda install google-api-python-client google-auth
+# #!conda install google-auth-httplib2   : 上記をInstallすれば自動的にインストールされる
+# #!conda install google-auth-oauthlib
+# #!pip install investpy  : みんかぶなので使用しない
 
 # +
 # investpyによる経済指標情報の入手
@@ -41,6 +26,8 @@
 #euro_data = economic_data[economic_data["zone"] == "euro zone"]
 #japan_data = economic_data[economic_data["zone"] == "japan"]
 #usa_data = economic_data[economic_data["zone"] == "united states"]
+
+import pandas as pd
 
 # +
 # みんかぶの将来データは、翌月末まで。
@@ -167,7 +154,7 @@ def get_economy_indicators_from_minkabu(date):
 
     # 重要度 i-starの文字列の中のstar-fillの数を数える
 #    re_command3=re.compile(r'(?:img alt=")(.+?)(?:" class="i-star")')
-    re_command3=re.compile(r'<span><img class="i-star".+.svg"/></span>')
+    re_command3=re.compile(r'<span><svg class="i-star.+</span>')
     priority_string_list=re_command3.findall(listdata)
 #    print('priority_data:{}'.format(priority_string_list))
     priority=[]
@@ -177,19 +164,19 @@ def get_economy_indicators_from_minkabu(date):
 #            if priority_data[i*5+j]=='Star fill':
 #                priority_level=priority_level+1
     for priority_string in priority_string_list:
-        priority_level=priority_string.count('star-fill')
+        priority_level=priority_string.count('i-star red')
         priority.append(priority_level)
 #        print('stars:{}'.format(priority_level))
 
-    # DataFrame化
-#    print('date:{}, time:{}, inportance:{},currency:{}, country:{}, event:{}, event_short:{}'.format(date_data, time_data, priority, currency, country_data, title,short_title))
-    # print("date:{}, {}".format(date_data,len(date_data)))
-    # print("time:{},{}".format(time_data,len(time_data)))
-    # print("importance:{},{}".format(priority,len(priority)))
-    # print("currency:{},{}".format(currency,len(currency)))
-    # print("country:{},{}".format(country_data,len(country_data)))
-    # print("event:{},{}".format(title,len(title)))
-    # print("event_short:{},{}".format(short_title,len(short_title)))
+
+# デバッグ用 DataFrameを作る前の各リストの値出力
+    # print("date:       {}個, {}".format(date_data,len(date_data)))
+    # print("time:       {}個, {}".format(time_data,len(time_data)))
+    # print("importance: {}個, {}".format(priority,len(priority)))
+    # print("currency:   {}個, {}".format(currency,len(currency)))
+    # print("country:    {}個, {}".format(country_data,len(country_data)))
+    # print("event:      {}個, {}".format(title,len(title)))
+    # print("event_short:{}個, {}".format(short_title,len(short_title)))
 
     df = pd.DataFrame({'date':date_data,
                        'time':time_data,
@@ -260,10 +247,10 @@ def add_googlecalendar(calendar_id,service,df):
             }
         }
         event=service.events().insert(calendarId=calendar_id, body=body).execute()
+        return event
 
 # DataFrameのスケジュール情報をGoogle Calendarから削除
 def remove_googlecalendar(calendar_id,service,df):
-    import datetime
     import time
     
     total=len(df['date'])
@@ -319,73 +306,30 @@ def initialize_googlecalendar():
 
 # +
 # google calendarに登録
-import datetime
-import googleapiclient.discovery
-import google.auth
-import pandas as pd
-
-# 重要なイベントだけ抽出
-df=get_economiy_indicators_60days()
-# df_over4=df[df['importance']>=4][df['currency']!='-']
-df_over4=df.loc[(df['importance']>=4)&(df['currency']!='-')]
-df_over4=pd.concat([df_over4,df.loc[(df['currency']=='CAD')&(df['event_short']=='中銀政策金利')]])
-df_over4['event(currency)']=['('+df_over4.iloc[i]['currency']+')'+df_over4.iloc[i]['event_short'] for i in range(len(df_over4))]
-
-# 現在のGoogleCalendarの情報を取得
-calendar_id,service=initialize_googlecalendar()
-googlecalendar=get_googlecalendar(calendar_id,service)
-
-# みんかぶの情報と現在のGoogle Calendarとの差分を抽出
-diff_df=pd.concat([googlecalendar,df_over4])
-diff_df.drop_duplicates(subset=['date','time','event(currency)'],keep=False,inplace=True)
-
-# そのうち、未登録の情報を追加
-add_df=diff_df[diff_df['event_id'].isnull()]
-add_googlecalendar(calendar_id,service,add_df)
-
-# そのうち、google calendarのみに存在する情報を消去
-del_df=diff_df[~diff_df['event_id'].isnull()]
-remove_googlecalendar(calendar_id,service,del_df)
 
 
-# +
-# 現時点のGoogle Calendarの登録内容を今日以降の登録内容をチェックし、重複しているイベントを削除
-def remove_duplicates_from_googlecalendar(calendar_id,service):
-    import datetime
-    import pandas as pd
-    import time
+if __name__=="__main__":
+    # 重要なイベントだけ抽出
+    df=get_economiy_indicators_60days()
+    # df_over4=df[df['importance']>=4][df['currency']!='-']
+    df_over4=df.loc[(df['importance']>=4)&(df['currency']!='-')]
+    df_over4=pd.concat([df_over4,df.loc[(df['currency']=='CAD')&(df['event_short']=='中銀政策金利')]])
+    df_over4['event(currency)']=['('+df_over4.iloc[i]['currency']+')'+df_over4.iloc[i]['event_short'] for i in range(len(df_over4))]
 
-#    now = (datetime.datetime.utcnow()-datetime.timedelta(days=5)).isoformat() + 'Z'  utcnow()が未推奨となったため変更
-    now = (datetime.datetime.now(datetime.UTC)-datetime.timedelta(days=5)).isoformat()[:-6] + "Z"
+    # 現在のGoogleCalendarの情報を取得
+    calendar_id,service=initialize_googlecalendar()
+    googlecalendar=get_googlecalendar(calendar_id,service)
 
-    event_list = service.events().list(
-         calendarId=calendar_id, timeMin=now,
-    #     maxResults=3, 
-         singleEvents=True,
-         orderBy='startTime').execute()
+    # みんかぶの情報と現在のGoogle Calendarとの差分を抽出
+    diff_df=pd.concat([googlecalendar,df_over4])
+    diff_df.drop_duplicates(subset=['date','time','event(currency)'],keep=False,inplace=True)
 
-    events = event_list.get('items', [])
-    formatted_events = [{'start':event['start'].get('dateTime', event['start'].get('date')), # start time or day
-         'end':event['end'].get('dateTime', event['end'].get('date')), # end time or day
-         'event':event['summary'],
-         'event_id':event['id']} for event in events]
-    df_googlecalendar=pd.DataFrame(formatted_events)
-    df_googlecalendar['duplicated']=df_googlecalendar.duplicated(subset=['start','end','event'])
+    # そのうち、未登録の情報を追加
+    add_df=diff_df[diff_df['event_id'].isnull()]
+    add_googlecalendar(calendar_id,service,add_df)
 
-    j=0
-    for i in range(len(df_googlecalendar)):
-        if df_googlecalendar.iloc[i]['duplicated']==True:
-            j=j+1
-            item=df_googlecalendar.iloc[i]
-            print('{}:{}を削除しています'.format(item['start'],item['event']))
-            ret=service.events().delete(calendarId=calendar_id,eventId=item['event_id']).execute()
-            time.sleep(3)  # サイトに拒否されないようにスリープを入れる
-    print('{}件削除しました'.format(j))
-
-
-# -
-
-calendar_id,service=initialize_googlecalendar()
-remove_duplicates_from_googlecalendar(calendar_id,service)
+    # そのうち、google calendarのみに存在する情報を消去
+    del_df=diff_df[~diff_df['event_id'].isnull()]
+    remove_googlecalendar(calendar_id,service,del_df)
 
 
