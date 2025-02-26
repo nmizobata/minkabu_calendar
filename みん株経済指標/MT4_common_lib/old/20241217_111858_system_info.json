@@ -1,0 +1,186 @@
+{
+    "TATE_MAX": 962,
+    "YOKO_MAX": 1917,
+    "Alpari in Box":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF","CADCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"",
+        "boxfolder":"D:/FX/★FX_chartfile/Alpari_MT4"
+    },
+    "Alpari_2 in Box":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF","CADCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"",
+        "boxfolder":"D:/FX/★FX_chartfile/Alpari_MT4_2"
+    },
+    "FXTF in Box":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"",
+        "boxfolder":"D:/FX/★FX_chartfile/FXTF_MT4"
+    },
+    "FXTF_2 in Box":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"",
+        "boxfolder":"D:/FX/★FX_chartfile/FXTF_MT4_2"
+    },
+    "Titan in Box":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF","CADCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"",
+        "boxfolder":"D:/FX/★FX_chartfile/Titan_MT4"
+    },
+    "Titan_2 in Box":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF","CADCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"",
+        "boxfolder":"D:/FX/★FX_chartfile/Titan_MT4_2"
+    },
+    "Alpari MT4":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF","CADCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"C:/Users/blues/AppData/Roaming/MetaQuotes/Terminal/287469DEA9630EA94D0715D755974F1B/profiles",
+        "boxfolder":"D:/FX/★FX_chartfile/Alpari_MT4"
+    },
+    "Alpari_2 MT4":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF","CADCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"C:/Users/blues/AppData/Roaming/MetaQuotes/Terminal/38EF02A5905678051D158DB441089AC0/profiles",
+        "boxfolder":"D:/FX/★FX_chartfile/Alpari_MT4_2"
+    },
+    "FXTF MT4":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"C:/Users/blues/AppData/Roaming/MetaQuotes/Terminal/F1DD1D6E7C4A311D1B1CA0D34E33291D/profiles",
+        "boxfolder":"D:/FX/★FX_chartfile/FXTF_MT4"
+    },
+    "FXTF_1 MT4":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"C:/Users/blues/AppData/Roaming/MetaQuotes/Terminal/2BCD94FB82029A7F5E4FB4BC1A1F4D83/profiles",
+        "boxfolder":"D:/FX/★FX_chartfile/FXTF_MT4"
+    },
+    "FXTF_2 MT4":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"C:/Users/blues/AppData/Roaming/MetaQuotes/Terminal/0A4685E8FFF330A4CFC9174E6FE966FD/profiles",
+        "boxfolder":"D:/FX/★FX_chartfile/FXTF_MT4_2"
+    },
+    "Titan MT4":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF","CADCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"C:/Users/blues/AppData/Roaming/MetaQuotes/Terminal/EC3CF66DAC6B4F7210364B8A2584852D/profiles",
+        "boxfolder":"D:/FX/★FX_chartfile/Titan_MT4"
+    },
+    "Titan_1 MT4":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF","CADCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"C:/Users/blues/AppData/Roaming/MetaQuotes/Terminal/449BB6B768FDC0170D4FEC86F084DADE/profiles",
+        "boxfolder":"D:/FX/★FX_chartfile/Titan_MT4"
+    },
+    "Titan_2 MT4":{
+        "supported currencypair": [
+        "JPN225","XAUUSD",
+        "EURGBP",
+        "EURAUD","GBPAUD",
+        "EURNZD","GBPNZD","AUDNZD",
+        "EURUSD","GBPUSD","AUDUSD","NZDUSD",
+        "EURCAD","GBPCAD","AUDCAD","NZDCAD","USDCAD",
+        "EURCHF","GBPCHF","AUDCHF","NZDCHF","USDCHF","CADCHF",
+        "EURJPY","GBPJPY","AUDJPY","NZDJPY","USDJPY","CADJPY","CHFJPY"],
+        "datafolder":"C:/Users/blues/AppData/Roaming/MetaQuotes/Terminal/0BC0B991B0227E1C66B83051763B592F/profiles",
+        "boxfolder":"D:/FX/★FX_chartfile/Titan_MT4_2"
+    }
+}
