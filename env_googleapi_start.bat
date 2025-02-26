@@ -1,6 +1,12 @@
-ECHO miniconda‚Ìİ’è‚¨‚æ‚Ñ‰¼‘zŠÂ‹«‚Ì©“®‹N“®
-ECHO ‰¼‘zŠÂ‹«‚ğI—¹‚·‚éê‡‚Í"deactivate"‚ğÀs
-ECHO googleapi: googleƒJƒŒƒ“ƒ_[“™Agoogle api‚ğg‚¤ƒAƒvƒŠŒü‚¯
+ECHO minicondaã®è¨­å®šãŠã‚ˆã³ä»®æƒ³ç’°å¢ƒã®è‡ªå‹•èµ·å‹•
+ECHO ä»®æƒ³ç’°å¢ƒã‚’çµ‚äº†ã™ã‚‹å ´åˆã¯"deactivate"ã‚’å®Ÿè¡Œ
+ECHO googleapi: googleã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼ç­‰ã€google apiã‚’ä½¿ã†ã‚¢ãƒ—ãƒªå‘ã‘
+ECHO conda install google-api-python-client google-auth
+ECHO conda install google-auth-httplib2   : ä¸Šè¨˜ã‚’Installã™ã‚Œã°è‡ªå‹•çš„ã«ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã‚‹
+ECHO conda install google-auth-oauthlib
+ECHO conda install pandas
+ECHO conda install beutifulsoup4
+ECHO conda install lxml
 
 set minicondapath=C:\Users\blues\miniconda3
 set kankyo=googleapi
