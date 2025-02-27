@@ -1,29 +1,31 @@
-# ---
-# jupyter:
-#   jupytext:
-#     formats: ipynb,py:light
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.16.4
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-# ---
+import pandas as pd
+import googlecalendar_lib as googlecalendar
+import minkabu as minkabu_df
 
-# +
-# 
 
-from MT4_common_lib import mt4_lib as mt
+if __name__=="__main__":
+    minkabu = minkabu_df.Minkabu_EconomicIndicators()
+    df=minkabu.get_economiy_indicators_60days()
+    # df.to_excel("event.xlsx")
+    
+    keyevent = minkabu_df.KeyEvents(df)
+    df_keyevents = keyevent.extract()
+    df_keyevents['event(currency)']=['('+df_keyevents.iloc[i]['currency']+')'+df_keyevents.iloc[i]['event_short'] for i in range(len(df_keyevents))]
 
-# +
-print("サンプルファイルです")
+    # 現在のGoogleCalendarの情報を取得
+    gcaledar = googlecalendar.GoogleCalendar()
+    current_event=gcaledar.get_googlecalendar()
+    
+    # みんかぶの情報と現在のGoogle Calendarとの差分を抽出
+    diff_df=pd.concat([current_event,df_keyevents])
+    diff_df.drop_duplicates(subset=['date','time','event(currency)'],keep=False,inplace=True)
+   
+    # そのうち、未登録の情報を追加
+    add_df=diff_df[diff_df['event_id'].isnull()]
+    gcaledar.add_googlecalendar(add_df)
 
-mt4_name = "Titan MT4"
-MT4 = mt.Mt4(mt4_name)
-print("{}のデータフォルダは[{}]です".format(mt4_name, MT4.datafolder))
-# -
+    # そのうち、google calendarのみに存在する情報を消去
+    del_df=diff_df[~diff_df['event_id'].isnull()]
+    gcaledar.remove_googlecalendar(del_df)
 
 
