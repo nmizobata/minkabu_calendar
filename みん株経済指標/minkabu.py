@@ -32,7 +32,6 @@ class Minkabu_EconomicIndicators:
 
         URL= 'https://fx.minkabu.jp/indicators?date='+date.strftime('%Y-%m-%d')
         listdata = self.get_analyzed_html(URL)
-        date_text = date.strftime("%Y年%m月%d日")
         if date.strftime("%Y年%m月%d日") not in self.get_datecaption(listdata)[0]:
             return
         time_data = self.get_timedata(listdata)
@@ -42,20 +41,10 @@ class Minkabu_EconomicIndicators:
         short_title=[item.split()[0] for item in title_data]    
         country_data = self.get_countrydata(listdata)
         currency_data = self.get_currencydata(country_data)
-        priority_data = self.get_prioritydata(listdata)
-
-    # デバッグ用 DataFrameを作る前の各リストの値出力
-        # print("date:       {}個, {}".format(date_data,len(date_data)))
-        # print("time:       {}個, {}".format(time_data,len(time_data)))
-        # print("importance: {}個, {}".format(priority,len(priority_data)))
-        # print("currency:   {}個, {}".format(currency,len(currency_data)))
-        # print("country:    {}個, {}".format(country_data,len(country_data)))
-        # print("event:      {}個, {}".format(title,len(title_data)))
-        # print("event_short:{}個, {}".format(short_title,len(short_title)))
+#        priority_data = self.get_prioritydata(listdata)
 
         df = pd.DataFrame({'date':date_data,
                         'time':time_data,
-                        'importance':priority_data,
                         'currency':currency_data,
                         'country':country_data,
                         'event':title_data,
@@ -68,7 +57,6 @@ class Minkabu_EconomicIndicators:
         re_command = re.compile(r'<caption.+?</caption>')
         return re_command.findall(listdata)
         
-    
     def get_analyzed_html(self,URL):
         import requests
         import bs4
@@ -76,10 +64,6 @@ class Minkabu_EconomicIndicators:
         res = requests.get(URL)
         soup=bs4.BeautifulSoup(res.content,'lxml',from_encoding='utf-8')
         listdata=str(soup.select('body > div > main > section > div > table:nth-child(3)')) 
-        #  print(listdata)
-        #  listdataのファイルへの書き出し(デバッグ用)
-        #  with open(r"C:\Users\blues\Desktop"+"/"+"listdata.txt",mode="w") as f:
-        #    f.write(listdata)
         return listdata
     
     def get_timedata(self,listdata):
@@ -162,6 +146,7 @@ class Minkabu_EconomicIndicators:
                 currency.append('-')
         return currency
     
+    # 重要指標はKeyEventsクラスで選択するためPrioritydataは未使用
     def get_prioritydata(self,listdata):
         import re
         
@@ -215,10 +200,25 @@ class KeyEvents:
 
 if __name__=="__main__":
     minkabu = Minkabu_EconomicIndicators()
-    df=minkabu.get_economiy_indicators_60days()
-    keyevents = KeyEvents(df)
-    print(keyevents.extract())
-    # URL="https://fx.minkabu.jp/indicators?date=2025-03-02"
-    # listdata = minkabu.get_analyzed_html(URL)
-    # with open("sample.txt","w") as f:
-    #     f.write(listdata)
+    mode = "debug mode"
+    if mode == "debug mode":
+        URL="https://fx.minkabu.jp/indicators?date=2025-03-02"
+        listdata = minkabu.get_analyzed_html(URL)
+        with open("listdata.txt","w") as f:
+            f.write(listdata)
+        caption = minkabu.get_datecaption(listdata)
+        time_data = minkabu.get_timedata(listdata)
+        country_data = minkabu.get_countrydata(listdata)
+        currency_data = minkabu.get_currencydata(country_data)
+        title_data = minkabu.get_timedata(listdata)
+        short_title = [item.split()[0] for item in title_data]
+        print("capttion          {}".format(caption))
+        print("time:       {}個, {}".format(len(time_data),time_data))
+        print("country:    {}個, {}".format(len(country_data),country_data))
+        print("currency:   {}個, {}".format(len(currency_data),currency_data))
+        print("event:      {}個, {}".format(len(title_data),title_data))
+        print("event_short:{}個, {}".format(len(short_title),short_title))
+    else:
+        df=minkabu.get_economiy_indicators_60days()
+        keyevents = KeyEvents(df)
+        print(keyevents.extract())
