@@ -1,3 +1,5 @@
+import google_credits as secret
+
 class GoogleCalendar:
     def __init__(self):
         self.calendar_id, self.service = self.initialize_googlecalendar()
@@ -7,8 +9,8 @@ class GoogleCalendar:
         import google.auth
         
         SCOPES = ['https://www.googleapis.com/auth/calendar']
-        calendar_id = 'pk3dm4n2tmlqvr6t9h0ipeears@group.calendar.google.com'
-        gapi_creds = google.auth.load_credentials_from_file(r'D:\FX\★FX_chartfile\MT4バッチツール\googlecalendar\mycalendarproject-374505-ded433e45278.json', SCOPES)[0]
+        calendar_id = secret.GoogleCalendarId("経済指標").getURL()
+        gapi_creds = google.auth.load_credentials_from_file(secret.GoogleCredential().FilePath, SCOPES)[0]
         service = googleapiclient.discovery.build('calendar', 'v3', credentials=gapi_creds)
         return calendar_id, service
     
