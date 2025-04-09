@@ -134,7 +134,9 @@ class Minkabu_EconomicIndicators:
                         'バチカン':'EUR',
                         '英国':'GBP',
                         'オーストラリア':'AUD',
+                        '豪':'AUD',
                         'ニュージーランド':'NZD',
+                        'NZ':'NZD',
                         'カナダ':'CAD',
                         'スイス':'CHF',
                         '日本':'JPY'}
